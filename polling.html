@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Poll</title>
+    <style>
+        /* CSS styles for the movie polling section */
+        .container {
+            width: 1250px; 
+            margin: 69px auto 0; 
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 40px;
+        }
+
+        .radio-container {
+            display: block;
+            margin-bottom: 10px;
+            width: 500px;
+        }
+
+        .radio-container input[type="radio"] {
+            display: none;
+        }
+
+        .radio-container label {
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .radio-container input[type="radio"] + label {
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .radio-container input[type="radio"] + label:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+
+        .radio-container input[type="radio"]:checked + label:before {
+            background-color: #131517;
+            border-color: #131517;
+        }
+
+        #selectedOption {
+            margin-top: 20px;
+        }
+
+        /* CSS styles for the profile section */
+        .profile-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .profile-section .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #FAFAFA;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .profile-section .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-section .profile-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-section .profile-header h1 {
+            margin: 0;
+        }
+
+        .profile-section .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .profile-section .detail-container {
+            position: relative;
+        }
+
+        .profile-section .profile-details div {
+            margin-bottom: 10px;
+        }
+
+        .profile-section .profile-details label {
+            font-weight: bold;
+            width: 150px;
+            display: inline-block;
+        }
+
+        .profile-section .profile-details span {
+            display: inline-block;
+            width: 300px;
+        }
+
+        .profile-section .edit-btn {
+            background-color: transparent;
+            color: red;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Poll</h1>
+        <form id="pollForm">
+            
+            <div>
+                <label>Select your favorite movie</label><br><br>
+                <div class="radio-container">
+                    <input type="radio" name="discovery" id="hiNanna" value="Hi Nanna">
+                    <label for="hiNanna">Hi Nanna</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="discovery" id="skanda" value="Skanda">
+                    <label for="skanda">Skanda</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="discovery" id="salar" value="Salar">
+                    <label for="salar">Salar</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="discovery" id="hanuman" value="Hanuman">
+                    <label for="hanuman">Hanuman</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="discovery" id="other" value="Other">
+                    <label for="other">Other</label>
+                </div>
+            </div>
+            
+            <div>
+                <br><br><button type="submit" id="submitButton">Submit</button>
+            </div>
+
+            <div id="selectedOption"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('pollForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+            var pollOption = "";
+
+            for (var pair of formData.entries()) {
+                pollOption = pair[1];
+            }
+
+            var message = "Thank you for participating in the poll! Your choice is: " + pollOption;
+            document.getElementById('selectedOption').innerText = message;
+
+            //disabled radio button 
+            var radioButtons = document.querySelectorAll('input[type="radio"]');
+            var submitButton = document.getElementById('submitButton');
+
+            radioButtons.forEach(function(radio) {
+                radio.disabled = true;
+            });
+
+            submitButton.disabled = true;
+        });
+    </script>
+</body>
+</html>

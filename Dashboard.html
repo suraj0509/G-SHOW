@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>G SHOW</title>
+    <!-- Skeleton loading page after home/events/move voting is clicked -->
+    <style>
+      /* CSS styles for the movie polling section */
+      #moviePollContainer {
+          width: 90%; /* Adjust width as needed */
+          max-width: 1000px; /* Limit maximum width if necessary */
+          margin: 69px auto 0; 
+          border: 2px solid #ccc;
+          border-radius: 10px;
+          padding: 40px;
+          background-color: #FAFAFA;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+  
+      .radio-container {
+          display: block;
+          margin-bottom: 10px;
+      }
+  
+      .radio-container input[type="radio"] {
+          display: none;
+      }
+  
+      .radio-container label {
+          cursor: pointer;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          display: block;
+      }
+  
+      .radio-container input[type="radio"] + label {
+          padding-left: 35px;
+          position: relative;
+      }
+  
+      .radio-container input[type="radio"] + label:before {
+          content: '';
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          border: 2px solid #ccc;
+      }
+  
+      .radio-container input[type="radio"]:checked + label:before {
+          background-color: #131517;
+          border-color: #131517;
+      }
+  
+      #selectedOption {
+          margin-top: 20px;
+      }
+  
+      /* CSS styles for other sections */
+      body {
+          font-family: sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f0f0f0;
+      }
+  
+      header {
+          padding: 20px;
+          display: flex;
+          justify-content: space-between;
+          background-color: white;
+          align-items: center;
+          flex-wrap: wrap;
+          margin-bottom: 0px;
+      }
+  
+      .logo {
+          width: 100px;
+          height: auto;
+      }
+  
+      .logo img {
+          max-width: 100%;
+          height: auto;
+      }
+  
+      form {
+          display: flex;
+          align-items: center;
+      }
+  
+      input[type="text"] {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-right: 10px;
+      }
+  
+      button[type="submit"] {
+          background-color: #000000;
+          color: white;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+  
+      .login-button {
+          color: white;
+          background-color: #000000;
+          padding: 10px 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+  
+      .header-buttons {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          background-color: white;
+          margin-bottom: 10px;
+          border-bottom: 1px solid black;
+      }
+  
+      .header-buttons button {
+          padding: 8px 23px;
+          border: none;
+          cursor: pointer;
+          margin-right: 10px;
+          border-bottom: none;
+      }
+  
+      .Home {
+          background-color: black;
+          color: white;
+          margin-left: 20px;
+      }
+  
+      .unselected1,
+      .unselected2 {
+          background-color: white;
+      }
+  
+      #profile-button {
+          padding-right: 10px;
+          color: black;
+          margin-left: auto;
+      }
+  
+      .unselected3 {
+          /* Style for the profile button */
+          background-color: white;
+          margin-left: auto;
+          margin-right: 25px;
+      }
+  
+      .blackBackground {
+          background-color: black;
+          color: white;
+      }
+  
+      .whiteBackground {
+          background-color: white;
+          color: black;
+      }
+  
+      .Upper-portion {
+          background-color: white;
+      }
+  
+      .profile-section,
+      .movie-poll-section {
+          display: none;
+          margin-top: 20px;
+      }
+  
+      /* CSS styles for the profile section */
+      #profileContainer {
+          max-width: 800px;
+          margin: 50px auto;
+          background-color: #FAFAFA;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+      }
+  
+      .profile-section .profile-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+      }
+  
+      .profile-section .profile-header img {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          margin-right: 20px;
+      }
+  
+      .profile-section .profile-header h1 {
+          margin: 0;
+      }
+  
+      .profile-section .profile-details {
+          margin-bottom: 20px;
+      }
+  
+      .profile-section .detail-container {
+          position: relative;
+      }
+  
+      .profile-section .profile-details div {
+          margin-bottom: 10px;
+      }
+  
+      .profile-section .profile-details label {
+          font-weight: bold;
+          width: 150px;
+          display: inline-block;
+      }
+  
+      .profile-section .profile-details span {
+          display: inline-block;
+          width: 300px;
+      }
+  
+      .profile-section .edit-btn {
+          background-color: transparent;
+          color: red;
+          border: none;
+          border-radius: 5px;
+          padding: 8px 16px;
+          cursor: pointer;
+          margin-right: 10px;
+      }
+  </style>  
+</head>
+<body>
+    <div class="Upper-portion">
+        <header>
+            <div class="logo"> <img src="LogoG.png" alt="G SHOW"></div>
+
+            <form action="#">
+                <input type="text" name="query" placeholder="Search">
+                <button type="submit">Search</button>
+            </form>
+
+            <button class="login-button" onclick="openLoginPage()">Login</button>
+
+        </header>
+
+        <div class="header-buttons">
+            <button id="homeButton" class="Home" onclick="navigateSection(this)">Home</button>
+            <button id="eventsButton" class="unselected1" onclick="navigateSection(this)">Events</button>
+            <button id="movieVotingButton" class="unselected2" onclick="navigateSection(this)">Movie Voting</button>
+            <button id="profileButton" class="unselected3" onclick="navigateSection(this)">Profile</button>
+        </div>
+    </div>
+    <main>
+        
+        <div id="homeSection">
+            <h1><center>This week's top picks!</center></h1>
+            <h4><center>Click to vote</center></h4>
+            <div class="slider">
+                <div class="list">
+                    <div class="item">
+                        <img src="hi_nanna.jpg">
+                    </div>
+                    <div class="item">
+                         <img src="op_val.jpeg">
+                    </div> 
+                    <div class="item">
+                        <img src="dune.jpg">
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="prev"><</button>
+                    <button id="next">></button>
+                </div>
+                <ul class="dots">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="profileContainer" class="profile-section">
+            <div class="container">
+                <div class="profile-header">
+                    <img src="https://tse4.mm.bing.net/th?id=OIP.7XqafriitHbGTUD9UkcmRwAAAA&pid=Api&P=0&h=180" alt="Profile Picture">
+                    <h1>Full name</h1>
+                </div>
+                <div class="profile-details">
+                    <div class="detail-container">
+                        <label><b>Registration No :</b></label>
+                        <span id="registrationNo">Enter Registration No.</span>
+                        <button class="edit-btn" onclick="editRegistrationNo()">Edit</button><br>
+                    </div>
+                    <div class="detail-container">
+                        <label><b>Mobile Number :</b></label>
+                        <span id="mobileNumber">Enter Mobile No. </span>
+                        <button class="edit-btn" onclick="editMobileNumber()">Edit</button><br>
+                    </div>
+                    <div class="detail-container">
+                        <label><b>Email Address :</b></label>
+                        <span id="emailAddress">Enter email address</span>
+                        <button class="edit-btn" onclick="editEmailAddress()">Edit</button><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="moviePollContainer" class="movie-poll-section">
+            <div class="container">
+                <h1>Movie Poll</h1>
+                <form id="pollForm">
+                    <div>
+                        <label>Select your favorite movie</label><br><br>
+                        <div class="radio-container">
+                            <input type="radio" name="discovery" id="hiNanna" value="Hi Nanna">
+                            <label for="hiNanna">Hi Nanna</label>
+                        </div>
+                        <div class="radio-container">
+                            <input type="radio" name="discovery" id="skanda" value="Skanda">
+                            <label for="skanda">Skanda</label>
+                        </div>
+                        <div class="radio-container">
+                            <input type="radio" name="discovery" id="salar" value="Salar">
+                            <label for="salar">Salar</label>
+                        </div>
+                        <div class="radio-container">
+                            <input type="radio" name="discovery" id="hanuman" value="Hanuman">
+                            <label for="hanuman">Hanuman</label>
+                        </div>
+                        <div class="radio-container">
+                            <input type="radio" name="discovery" id="other" value="Other">
+                            <label for="other">Other</label>
+                        </div>
+                        <button type="submit" id="submitButton">Submit</button>
+                    </div>
+                    <!-- Move the submit button inside the form -->
+                    
+                </form>
+                <!-- Move the selected option outside the form -->
+                <div id="selectedOption"></div>
+            </div>
+        </div>
+    </main>
+    <script src="app.js"></script>
+    <script>
+        // JavaScript functions for navigation and movie polling
+        function openLoginPage() {
+            window.location.href = "Login_Signup.html";
+        }
+
+        function navigateSection(clickedButton) {
+            // Reset styles for all buttons
+            document.getElementById('homeButton').classList = 'Home whiteBackground';
+            document.getElementById('eventsButton').classList = 'unselected1 whiteBackground';
+            document.getElementById('movieVotingButton').classList = 'unselected2 whiteBackground';
+            document.getElementById('profileButton').classList = 'unselected3 whiteBackground';
+
+            // Change styles for the clicked button
+            clickedButton.classList.remove('whiteBackground');
+            clickedButton.classList.add('blackBackground');
+
+            // Hide all sections
+            document.getElementById('homeSection').style.display = 'none';
+            document.getElementById('profileContainer').style.display = 'none';
+            document.getElementById('moviePollContainer').style.display = 'none';
+
+            // Show the corresponding section based on the clicked button
+            if (clickedButton.id === 'homeButton') {
+                document.getElementById('homeSection').style.display = 'block';
+            } else if (clickedButton.id === 'eventsButton') {
+                // Handle events button click if needed
+            } else if (clickedButton.id === 'movieVotingButton') {
+                document.getElementById('moviePollContainer').style.display = 'block';
+            } else if (clickedButton.id === 'profileButton') {
+                document.getElementById('profileContainer').style.display = 'block';
+            }
+        }
+        
+        function editRegistrationNo() {
+        var newRegistrationNo = prompt("Enter new Registration Number:");
+        if (newRegistrationNo !== null) {
+            document.getElementById("registrationNo").textContent = newRegistrationNo;
+        }
+        }
+
+        function editMobileNumber() {
+        var newMobileNumber = prompt("Enter new Mobile Number:");
+        if (newMobileNumber !== null) {
+            document.getElementById("mobileNumber").textContent = newMobileNumber;
+        }
+        }
+
+        function editEmailAddress() {
+        var newEmailAddress = prompt("Enter new Email Address:");
+        if (newEmailAddress !== null) {
+            document.getElementById("emailAddress").textContent = newEmailAddress;
+        }
+        }
+
+        document.getElementById('pollForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+            var pollOption = "";
+
+            for (var pair of formData.entries()) {
+                pollOption = pair[1];
+            }
+
+            var message = "Thank you for participating in the poll! Your choice is: " + pollOption;
+            document.getElementById('selectedOption').innerText = message;
+
+            // Disabled radio button 
+            var radioButtons = document.querySelectorAll('input[type="radio"]');
+            var submitButton = document.getElementById('submitButton');
+
+            radioButtons.forEach(function(radio) {
+                radio.disabled = true;
+            });
+
+            submitButton.disabled = true;
+        });
+    </script>
+</body>
+</html>

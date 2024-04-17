@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding with Robby</title>
+    <link rel="stylesheet" href="home_css.css" />
+  </head>
+  <body>
+    <div class="logos">
+      <div class="logos-slide">
+        <img src="hi_nanna.jpg" />
+        <img src="dune.jpg" />
+        <img src="op_val.jpeg" />
+      </div>
+    </div>
+
+    <script>
+      var copy = document.querySelector(".logos-slide").cloneNode(true);
+      document.querySelector(".logos").appendChild(copy);
+    </script>
+  </body>
+</html>

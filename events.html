@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .Genre {
+      display: flex;
+      justify-content: flex-start; /* Adjust this property to align items to the left */
+      align-items: center;
+      flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+      margin: 0; /* Remove margin for no spacing */
+      gap: 10px;
+      padding-left: 20px;
+    }
+
+    .event {
+      width: 200px;
+      height: 200px;
+      border: 5px solid #ccc;
+      text-align: center;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px; /* Adjust this value to change the roundness of the edges */
+      overflow: hidden; /* This ensures the rounded corners are applied correctly */
+    }
+
+    .event img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+
+    p {
+      margin: 10px;
+      position: relative;
+    }
+
+    .additional-info {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .event:hover .additional-info {
+      display: block;
+    }
+  </style>
+  <title>Events List</title>
+</head>
+<body>
+  <h1>Events List</h1>
+  <div class="Genre">
+    <div class="event">
+      <img src="event2.jpg" alt="Shore">
+      <p>Shore 23
+        <span class="additional-info">
+          This is the university's most anticipated and most appreciated fest. This fest will be done on a large scale.
+        </span>
+      </p>
+    </div>
+    <div class="event">
+      <img src="event2.jpg" alt="Homecoming">
+      <p>Homecoming</p>
+    </div>
+    <div class="event">
+      <img src="event2.jpg" alt="GUSAC Carnival">
+      <p>GUSAC Carnival 09</p>
+    </div>
+  </div>
+</body>
+</html>

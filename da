@@ -1,0 +1,69 @@
+1. 
+create table Event_Master(
+    EventID varchar(10) primary key, 
+    Category varchar(30) 
+);
+create table Venue_Master(
+    Venue_Id varchar(10) primary key,
+    EventID varchar(10) references Event_Master(EventID),
+    Venue_name varchar(30),
+    Location varchar(50),
+    Venue_Cost int,
+    Food varchar(10),
+    Capacity int,
+    Wifi varchar(10),
+    Description varchar(50)
+);
+
+create table Customer_Master( 
+    Cust_Id varchar(10) primary key, 
+    C_first_name varchar(30), 
+    C_middle_name varchar(30), 
+    C_last_name varchar(30), 
+    Gender varchar(10), 
+    Street varchar(30), 
+    City varchar(30), 
+    Phoneno varchar(20), 
+    Email varchar(30)
+);
+create table Enquiry_Master(
+    EnquiryId varchar(10) primary key,
+    Cust_Id varchar(10) references Customer_Master(Cust_Id), 
+    Venue_Id varchar(10) references Venue_Master(Venue_Id), 
+    Start_Date date,
+    End_Date date,
+    Status varchar(30)
+);
+create table BookingMaster(
+    BookingID int primary key,
+    EnquiryId int references Enquiry_Master(EnquiryId),
+    Total_amount int,
+    Mode_of_pay varchar(30)
+);
+
+2.
+ALTER TABLE Venue_Master
+MODIFY Wifi VARCHAR(10) NOT NULL;
+
+3.
+ALTER TABLE Booking_Master
+ADD CONSTRAINT fk_EnquiryId FOREIGN KEY (Enquiry_Id) REFERENCES Enquiry_Master(Enquiry_Id);
+
+4.
+ALTER TABLE Venue_Master
+MODIFY Description VARCHAR(30);
+
+ALTER TABLE Venue_Master
+ADD contact_no VARCHAR(10) AFTER Venue_name;
+
+5.
+alter table Booking_Master
+DROP FOREIGN key fk_bookings;
+
+6.
+truncate Booking_Master;
+
+7.
+DROP table Booking_Master;
+
+8.
